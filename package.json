@@ -1,0 +1,34 @@
+{
+  "name": "fitness-tracker",
+  "version": "1.0.0",
+  "description": "An app to track exercise and fitness",
+  "main": "index.js",
+  "author": "Matthew Kwon",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "build-prod": "webpack --mode production",
+    "start": "webpack --mode development -w"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "axios": "^0.21.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@hot-loader/react-dom": "^17.0.1+4.13.0",
+    "webpack-dev-server": "^4.0.0"
+  }
+}

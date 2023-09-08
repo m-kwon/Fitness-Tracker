@@ -1,24 +1,26 @@
 import React from 'react';
-import Navbar from './Navbar/Navbar';
-import Exercise from './Exercise/Exercise';
-import AddExercise from './Exercise/AddExercise';
-import ExerciseList from './Exercise/ExerciseList';
+import { useSelector } from 'react-redux';
+import { Container } from '@material-ui/core';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Navbar from './Navbar';
 import Program from './Program/Program';
-import CreateProgram from './Program/AddProgram';
-import ProgramList from './Program/ProgramList';
+import Exercise from './Exercise/Exercise';
 
 const App = () => {
+
+  const programId = useSelector(state => state.programId);
+
   return (
-    <div>
-      App
-      <Navbar />
-      <Program />
-      <CreateProgram />
-      <ProgramList />
-      <Exercise />
-      <AddExercise />
-      <ExerciseList />
-    </div>
+    <Router>
+      <Container>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Program}/>
+          <Route path="/program/:programId" component={Exercise}/>
+        </Switch>
+      </Container>
+    </Router>
   )
 }
 

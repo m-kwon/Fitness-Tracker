@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { TextField, Select, MenuItem, InputLabel, FormLabel, Button } from '@material-ui/core';
+import { TextField, Select, MenuItem, InputLabel, FormLabel, Button, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: '25ch',
+  },
+}));
 
 const CreateProgram = ({userId}) => {
+
+  const classes = useStyles();
 
   const weeks = [];
   for (let i = 0; i <= 25; i++) {
@@ -22,24 +36,20 @@ const CreateProgram = ({userId}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (programForm.name.length && programForm.numOfWeeks > 0) {
-      axios.post('http://localhost:3000/program/create', {...programForm, userId})
+      axios.post('http://localhost:3000/api/program/create', {...programForm, userId})
         .then(success => console.log(success.data))
         .catch(err => console.log(err))
     }
   };
 
   return (
-    <div className="create-program">
-      <form>
-        <InputLabel>Program Name</InputLabel>
-        <TextField name="name" variant="outlined" label="Program Name" onChange={handleChange}/>
-        <InputLabel>Number of Weeks</InputLabel>
-        <Select name="numOfWeeks" defaultValue="" variant="outlined" onChange={handleChange}>
-          {weeks}
-        </Select>
-        <Button variant="outlined" onClick={handleSubmit}>Create Program</Button>
-      </form>
-    </div>
+    <form className={classes.root}>
+      <TextField className={classes.formField} name="name" variant="outlined" label="Program Name" onChange={handleChange}/>
+      <Select className={classes.formField} name="numOfWeeks" defaultValue="" variant="outlined" onChange={handleChange}>
+        {weeks}
+      </Select>
+      <Button className={classes.formField} variant="outlined" onClick={handleSubmit}>Create Program</Button>
+    </form>
   )
 }
 

@@ -4,7 +4,7 @@ import Exercise from './Exercise/Exercise';
 import AddExercise from './Exercise/AddExercise';
 import ExerciseList from './Exercise/ExerciseList';
 import Program from './Program/Program';
-import AddProgram from './Program/AddProgram';
+import CreateProgram from './Program/AddProgram';
 import ProgramList from './Program/ProgramList';
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
       App
       <Navbar />
       <Program />
-      <AddProgram />
+      <CreateProgram />
       <ProgramList />
       <Exercise />
       <AddExercise />

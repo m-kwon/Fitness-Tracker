@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 import AddExercise from './AddExercise';
-import { getExercises, deleteExercise } from '../../redux/actions/exercises';
+import ExerciseList from './ExerciseList';
+import { getExercises } from '../../redux/actions/exercises';
+import { getProgramsById } from '../../redux/actions/programs';
 
 const Exercise = ({match}) => {
 
@@ -20,41 +16,49 @@ const Exercise = ({match}) => {
 
   const exercises = useSelector(state => state.exercises);
 
+  const user = JSON.parse(localStorage.getItem('profile'));
+  const id = user?.result.googleId || user?.result._id;
+
+  const program = useSelector(state => state.programs)[0];
+
+  const [exerciseId, setExerciseId] = useState(null);
+
+  const weekdays = {
+    '1': 'Monday',
+    '2': 'Tuesday',
+    '3': 'Wednesday',
+    '4': 'Thursday',
+    '5': 'Friday',
+    '6': 'Saturday',
+    '7': 'Sunday',
+  };
+
+  const date = new Date();
+  const day = weekdays[date.getDay().toString()];
+
+  const activeExercises = exercises.filter(exercise => exercise.days.indexOf(day) !== -1);
+  const unactiveExercises = exercises.filter(exercise => exercise.days.indexOf(day) === -1);
+
   useEffect(() => {
+    dispatch(getProgramsById(programId));
     dispatch(getExercises(programId));
   }, []);
 
-  const exerciseList = exercises.map(exercise => {
-    return (
-      <TableRow key={exercise._id}>
-        <TableCell component="th" scope="row">{exercise.name}</TableCell>
-        <TableCell align="right">{exercise.weight}</TableCell>
-        <TableCell align="right">{exercise.sets}</TableCell>
-        <TableCell align="right">{exercise.reps}</TableCell>
-        <TableCell align="right"><Button color="secondary" onClick={() => {dispatch(deleteExercise(exercise._id))}}>Delete</Button></TableCell>
-      </TableRow>
-    )
-  });
-
   return (
     <div>
-      <AddExercise programId={programId} getExercises={getExercises}/>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Exercise Name</TableCell>
-              <TableCell align="right">Weight</TableCell>
-              <TableCell align="right">Sets</TableCell>
-              <TableCell align="right">Reps</TableCell>
-              <TableCell align="right">Delete</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {exerciseList}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Typography variant="h4" align="center" style={{padding: "50px"}}>{program?.name} by {program?.creatorName}</Typography>
+
+      {(user?.result?.googleId === program?.creator || user?.result?._id === program?.creator) && (
+        <>
+          <AddExercise programId={programId} getExercises={getExercises} exerciseId={exerciseId} setExerciseId={setExerciseId}/>
+        </>
+      )}
+      <div style={{padding: "50px"}}>
+        <ExerciseList name="Today's Exercises" exercises={activeExercises} exerciseId={exerciseId} setExerciseId={setExerciseId}/>
+      </div>
+      <div style={{padding: "50px"}}>
+        <ExerciseList name="Rest of the Week" exercises={unactiveExercises} exerciseId={exerciseId} setExerciseId={setExerciseId}/>
+      </div>
     </div>
   )
 }

@@ -26,3 +26,12 @@ export const deleteExercise = (exerciseId) => async (dispatch) => {
     console.log(error);
   }
 }
+
+export const updateExercise = (exerciseId, exercise) => async (dispatch) => {
+  try {
+    const { data } = await api.updateExercise(exerciseId, exercise);
+    dispatch({type: 'UPDATE_EXERCISE', payload: data});
+  } catch (error) {
+    console.log(error);
+  }
+}

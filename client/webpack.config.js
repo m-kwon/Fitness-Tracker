@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+require('dotenv').config();
 
 const config = {
   entry: [
@@ -10,6 +12,13 @@ const config = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'CLIENT_ID': JSON.stringify(process.env.CLIENT_ID),
+      }
+    })
+  ],
   module: {
     rules: [
       {

@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../controllers/User');
 
 router
-  .post('/login', User.login)
-  .post('/create', User.createUser)
+  .post('/signin', User.signin)
+  .post('/signup', User.signup)
 
 module.exports = router;

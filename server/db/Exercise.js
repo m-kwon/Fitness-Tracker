@@ -20,7 +20,9 @@ const exerciseSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Program',
     required: true
-  }
+  },
+  creator: String,
+  creatorName: String
 });
 
 const Exercise = mongoose.model('Exercise', exerciseSchema);

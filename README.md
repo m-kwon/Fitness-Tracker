@@ -1,6 +1,6 @@
 # Fitness Tracker
 
-[Demo](https://fitnesstrackermkwon.netlify.app/)
+[Demo](https://main--fitness-tracker-mkwon.netlify.app/)
 ![Alt text](client/dist/assets/FitnessTracker.png "Fitness Tracker")
 
 ### What is FitLog?

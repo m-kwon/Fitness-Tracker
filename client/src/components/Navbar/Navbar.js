@@ -31,7 +31,7 @@ const Navbar = () => {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Button component={Link} to="/" color="inherit">
-              FitLog
+              Fitness Tracker
             </Button>
           </Typography>
           <Button component={Link} to="/" color="inherit">

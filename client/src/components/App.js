@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Container } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Navbar from './Navbar';
+import Navbar from './Navbar/Navbar';
 import Program from './Program/Program';
 import Exercise from './Exercise/Exercise';
 

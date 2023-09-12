@@ -1,7 +1,7 @@
 # Fitness Tracker
 
 [Demo](https://fitnesstrackermkwon.netlify.app/)
-![Alt text](../Portfolio/frontend_react/src/assets/projects/Fitness Tracker.png "Fitness Tracker")
+![Alt text](client/dist/assets/FitnessTracker.png "Fitness Tracker")
 
 ### What is FitLog?
   > A web application for gym-goers to create their own personalized workout programs and track their progress.
